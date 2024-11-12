@@ -11,8 +11,8 @@ def main():
     train_df, _ = load_data()
     
     print("Preprocessing data...")
-    # Use only 2017-2021 data for training
-    train_years = list(range(2017, 2022))
+    # Use 2017-2019 and 2021 data for training (excluding 2020 pandemic year)
+    train_years = [2017, 2018, 2019, 2021]
     X_train, y_train, countries = preprocess_data(train_df, is_training=True, train_years=train_years)
     
     # Train model
