@@ -6,6 +6,7 @@ data/visualizations/*
 models/
 .DS_Store
 src/__pycache__/*
+.ipynb_checkpoints/
 
 # Don't ignore .gitkeep files
 !data/processed/.gitkeep
