@@ -1,6 +1,8 @@
+import os
+import numpy as np
+import pandas as pd
 from data_preprocessing import load_data, preprocess_data
 from model import SalesPredictor
-import pandas as pd
 
 def generate_predictions():
     # Load data
