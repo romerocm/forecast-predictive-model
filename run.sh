@@ -10,8 +10,11 @@ case "$1" in
   "predict")
     docker-compose up --build predict
     ;;
+  "jupyter")
+    docker-compose up --build jupyter
+    ;;
   *)
-    echo "Usage: ./run.sh [train|analyze|predict]"
+    echo "Usage: ./run.sh [train|analyze|predict|jupyter]"
     exit 1
     ;;
 esac

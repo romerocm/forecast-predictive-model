@@ -1,13 +1,22 @@
 version: '3'
 
 services:
-  ml_model:
+  jupyter:
     build: .
     volumes:
       - .:/app
       - ./data:/app/data
     ports:
-      - "8888:8888"  # For Jupyter Notebook
+      - "8888:8888"
+    environment:
+      - PYTHONPATH=/app
+    command: ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+
+  ml_model:
+    build: .
+    volumes:
+      - .:/app
+      - ./data:/app/data
     environment:
       - PYTHONPATH=/app
     command: ["python", "src/train.py"]  # Default command
