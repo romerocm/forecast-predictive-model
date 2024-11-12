@@ -198,11 +198,14 @@ def analyze_data():
     lr_model.fit(X_train_numeric, y_train)
     lr_predictions = lr_model.predict(X_train_numeric)
     
-    # Create monthly averages for comparison
+    # Create monthly averages for comparison, excluding 2020
     train_df['predictions_rf'] = y_pred
     train_df['predictions_lr'] = lr_predictions
     
-    monthly_avg = train_df.groupby(['year', 'month']).agg({
+    # Filter out 2020 data
+    train_df_filtered = train_df[train_df['year'] != 2020]
+    
+    monthly_avg = train_df_filtered.groupby(['year', 'month']).agg({
         'num_sold': 'mean',
         'predictions_rf': 'mean',
         'predictions_lr': 'mean'
