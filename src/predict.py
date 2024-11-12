@@ -14,13 +14,24 @@ def generate_predictions():
     predictor.load_model()
     predictions = predictor.predict(X_test)
     
+    # Round predictions to integers
+    predictions = np.round(predictions).astype(int)
+    
     # Create submission file
     submission = pd.DataFrame({
         'id': test_df['id'],
         'num_sold': predictions
     })
+    
+    # Ensure the output directory exists
+    os.makedirs('data/processed', exist_ok=True)
+    
+    # Save predictions in the required format
     submission.to_csv('data/processed/submission.csv', index=False)
-    print("Predictions saved to submission.csv")
+    print("\nPredictions saved to data/processed/submission.csv")
+    print(f"Generated {len(predictions)} predictions")
+    print("\nFirst few predictions:")
+    print(submission.head().to_string())
 
 if __name__ == "__main__":
     generate_predictions()
