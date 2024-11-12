@@ -21,15 +21,19 @@ This project implements a machine learning system for forecasting sales across d
 
 ## Setup
 
-1. Clone the repository
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-name>
+   ```
 2. Install Docker and docker-compose if not already installed
 3. Place your input data files in `data/raw/`:
-   - `train.csv`
-   - `test.csv`
+   - `train.csv` - Training data
+   - `test.csv` - Test data for predictions
 
 ## Usage
 
-The project uses Docker for reproducible execution. Use the provided shell script:
+The project uses Docker for reproducible execution:
 
 ```bash
 # Make the run script executable
@@ -38,7 +42,7 @@ chmod +x run.sh
 # Train the model
 ./run.sh train
 
-# Generate analysis & visualizations
+# Generate analysis & visualizations 
 ./run.sh analyze
 
 # Generate predictions
@@ -46,8 +50,8 @@ chmod +x run.sh
 ```
 
 All outputs will be saved to:
-- `data/processed/` - For intermediate files and predictions
-- `data/visualizations/` - For generated plots and charts
+- `data/processed/` - Intermediate files and predictions
+- `data/visualizations/` - Generated plots and charts
 
 ## Data Requirements
 
