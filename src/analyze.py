@@ -7,13 +7,15 @@ from model import SalesPredictor
 import joblib
 import os
 
-def plot_country_comparisons(train_df):
+def plot_country_comparisons(train_df_original):
+    # Filter out 2020 data
+    train_df = train_df_original[train_df_original['year'] != 2020].copy()
     """Create comparative bar plots for different variables across countries"""
     
     # Average sales by country
     plt.figure(figsize=(12, 6))
     sns.barplot(data=train_df, x='country', y='num_sold', estimator='mean')
-    plt.title('Average Daily Sales by Country')
+    plt.title('Average Daily Sales by Country (Excluding 2020)')
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.savefig('data/visualizations/country_avg_sales.png')
@@ -23,7 +25,7 @@ def plot_country_comparisons(train_df):
     plt.figure(figsize=(12, 6))
     country_max = train_df.groupby('country')['num_sold'].max().reset_index()
     sns.barplot(data=country_max, x='country', y='num_sold')
-    plt.title('Maximum Daily Sales by Country')
+    plt.title('Maximum Daily Sales by Country (Excluding 2020)')
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.savefig('data/visualizations/country_max_sales.png')
@@ -33,7 +35,7 @@ def plot_country_comparisons(train_df):
     plt.figure(figsize=(15, 8))
     store_country = train_df.groupby(['country', 'store'])['num_sold'].mean().reset_index()
     sns.barplot(data=store_country, x='country', y='num_sold', hue='store')
-    plt.title('Average Sales by Store and Country')
+    plt.title('Average Sales by Store and Country (Excluding 2020)')
     plt.xticks(rotation=45)
     plt.legend(title='Store', bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
@@ -44,7 +46,7 @@ def plot_country_comparisons(train_df):
     plt.figure(figsize=(15, 8))
     product_country = train_df.groupby(['country', 'product'])['num_sold'].mean().reset_index()
     sns.barplot(data=product_country, x='country', y='num_sold', hue='product')
-    plt.title('Average Sales by Product and Country')
+    plt.title('Average Sales by Product and Country (Excluding 2020)')
     plt.xticks(rotation=45)
     plt.legend(title='Product', bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
@@ -56,7 +58,7 @@ def plot_country_comparisons(train_df):
     plt.figure(figsize=(15, 8))
     monthly_country = train_df.groupby(['country', 'month'])['num_sold'].mean().reset_index()
     sns.barplot(data=monthly_country, x='month', y='num_sold', hue='country')
-    plt.title('Average Monthly Sales by Country')
+    plt.title('Average Monthly Sales by Country (Excluding 2020)')
     plt.xlabel('Month')
     plt.ylabel('Average Daily Sales')
     plt.legend(title='Country', bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -117,7 +119,7 @@ def plot_country_comparisons(train_df):
     plt.figure(figsize=(12, 6))
     weekend_country = train_df.groupby(['country', 'is_weekend'])['num_sold'].mean().reset_index()
     sns.barplot(data=weekend_country, x='country', y='num_sold', hue='is_weekend')
-    plt.title('Weekend vs Weekday Average Sales by Country')
+    plt.title('Weekend vs Weekday Average Sales by Country (Excluding 2020)')
     plt.xticks(rotation=45)
     plt.legend(title='Is Weekend', labels=['Weekday', 'Weekend'])
     plt.tight_layout()
