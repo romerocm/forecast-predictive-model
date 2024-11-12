@@ -8,8 +8,10 @@ import joblib
 import os
 
 def plot_country_comparisons(train_df_original):
-    # Filter out 2020 data
-    train_df = train_df_original[train_df_original['year'] != 2020].copy()
+    # Extract year from date and filter out 2020 data
+    train_df = train_df_original.copy()
+    train_df['year'] = pd.to_datetime(train_df['date']).dt.year
+    train_df = train_df[train_df['year'] != 2020]
     """Create comparative bar plots for different variables across countries"""
     
     # Average sales by country
