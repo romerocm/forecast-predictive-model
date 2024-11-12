@@ -2,6 +2,5 @@
 .env
 data/processed
 models/
-data
 .DS_Store
  src/__pycache__/*
